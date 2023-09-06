@@ -1,4 +1,4 @@
-                          #//////////////////////////////////////#
+                        #//////////////////////////////////////#
                         #                                      #
                         ###           Weather APP            ###    
                         #                                      #
@@ -12,11 +12,16 @@ Esta aplicación multiplataforma (Windows, Linux, Mac) convierte una cantidad de
 """
 # ©2023 Apliccion d epronóstico del tiempo de Juan Fuente
 
-"""Novedades de la versión 0.0.3
-- Se 
+"""Novedades de la versión 0.0.2
+- Se Integra la API de openmeteo.com
+- Se integra la API de Nominatim
+- Se verifica la validez de postal_code y location
+- Se integra Timezonefinder para localizar la zona horaria
+- 
 """
 
 #Listado de funciones: comprobar_cantidad_moneda (recoge la cantidad de moneda a convertir y evalua la calidad de los datos), comprobar_divisa(recoge las monedas introducidas por el usuario, asegura la calidad de los datos y devuelve separados el nombre y el valor de la moneda. Se usa tanto para obtener la moneda como la divisa.)
+
 
 
 
@@ -39,7 +44,6 @@ import re
 weather = {'latitude': 52.52, 'longitude': 13.419998, 'generationtime_ms': 0.8310079574584961, 'utc_offset_seconds': 7200, 'timezone': 'Europe/Berlin', 'timezone_abbreviation': 'CEST', 'elevation': 38.0, 'current_weather': {'temperature': 21.2, 'windspeed': 5.8, 'winddirection': 274, 'weathercode': 0, 'is_day': 1, 'time': '2023-09-04T12:00'}, 'daily_units': {'time': 'iso8601', 'apparent_temperature_max': '°C', 'apparent_temperature_min': '°C', 'precipitation_probability_mean': '%', 'weathercode': 'wmo code',
 'sunrise': 'iso8601', 'sunset': 'iso8601'}, 'daily': {'time': ['2023-09-04', '2023-09-05', '2023-09-06', '2023-09-07', '2023-09-08', '2023-09-09', '2023-09-10'], 'apparent_temperature_max': [25.1, 27.0, 28.7, 27.3, 27.6, 29.8, 30.0], 'apparent_temperature_min': [11.0, 14.3, 14.7, 16.2, 16.1, 17.1, 15.3], 'precipitation_probability_mean': [0, 0, 0, 0, 0, 0, 3], 'weathercode':
 [45, 3, 1, 3, 1, 0, 45], 'sunrise': ['2023-09-04T06:22', '2023-09-05T06:23', '2023-09-06T06:25', '2023-09-07T06:27', '2023-09-08T06:28', '2023-09-09T06:30', '2023-09-10T06:32'], 'sunset': ['2023-09-04T19:48', '2023-09-05T19:46', '2023-09-06T19:44', '2023-09-07T19:41', '2023-09-08T19:39', '2023-09-09T19:37', '2023-09-10T19:34']}}"""
-
 
 
 #url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&timezone={timezone}&daily=temperature_2m_1h,precipitation_probability_mean,weathercode,sunrise,sunset&current_weather=true&forecast_days=7"
@@ -152,6 +156,7 @@ def get_weather(latitude, longitude, timezone):
     # convertir el pronóstico del tiempo a texto
     #forecast_text = f'El pronóstico del tiempo para {city} es: {weather["current_weather"]["winddirection"]}.'
     #print(forecast_text)
+
 
 
 #----------------------LOGICA---------------------
