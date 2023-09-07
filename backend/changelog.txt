@@ -1,0 +1,15 @@
+# *** Weather-API : Version 0.0.3 ***
+# Creative Commons 2023: Juan Fuente 2023
+
+"""
+Esta aplicación de interfaz gráfica, multiplataforma (Windows, Linux, Mac), ofrece el tiempo actual en una localidad o codigo postal determinadas actualizados en tiempo real entre y la predicion metereologica para los proximos cuatro dias.
+
+#Novedades en la version 0.0.3
+-
+
+
+#Novedades en la version 0.0.2
+- Se Integra la API de openmeteo.com
+- Se integra la API de Nominatim
+- Se verifica la validez de postal_code y location
+- Se integra Timezonefinder para localizar la zona horaria
