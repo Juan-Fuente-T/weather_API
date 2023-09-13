@@ -50,6 +50,43 @@ weather = {'latitude': 52.52, 'longitude': 13.419998, 'generationtime_ms': 0.831
 debugging = True
 
 
+# Importa la clave de la API desde tu archivo .env
+openai_api_key = config("api_key")
+
+# Configura la URL de la API de OpenAI
+URL = "https://api.openai.com/v1/chat/completions"
+
+# Configura los encabezados de la solicitud
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {openai_api_key}"
+}
+
+def consulta_openAI (location):
+    payload = {
+        "model": "gpt-3.5-turbo",
+        "messages" : [
+            {"role": "system", "content": "Eres un asistente que proporciona información meteorologica relevante en un tono coloquial"},
+            {"role": "user", "content": "¿Que tiempo hace ahora en {location}?, ¿Cuál es la previsión para los próximos días en {location}?, ¿Se esperan cambios importantes en el clima de {location} para los próximos días? ¿Cuáles?"}
+        ]
+    }
+
+    response = requests.post(URL, headers=headers, json=payload)
+
+    response = response.json()
+    
+    print(response)
+
+    # Verifica si la respuesta incluye el campo 'choices'
+    if 'choices' in response:
+        return response['choices'][0]['message']['content']
+    else:
+        # Si no, devuelve un mensaje de error
+        return "Error: La respuesta de la API no incluye el campo 'choices'."
+
+#print(consulta_openAI("Madrid"))
+
+
 def geocode_location(location):
     
     print("Comprobando entrada datos Location Nominating:", location)
@@ -179,7 +216,11 @@ if is_postal_code(input_value):
 else: 
     location = input_value
     postal_code =None
+
+
+
     
+   
 """    
 if location:
     latitude, longitude = geocode_location(location)
@@ -190,6 +231,9 @@ elif postal_code:
     if not latitude or not longitude:
         location = input_value """   
 if location:
+    print("macarroneSSSSSSSSSSSSSS")
+    tiempo = consulta_openAI(location)
+    print("TIEMPO", tiempo)
     latitude, longitude, timezone = geocode_location(location)
 elif postal_code:
     latitude, longitude, timezone = geocode_postal_code(postal_code)
@@ -207,6 +251,8 @@ if debugging:
 if latitude is not None and longitude is not None and timezone is not None:
     # Llamar a get_weather con los valores obtenidos
     get_weather(latitude, longitude, timezone)
+    
+    
 else:
     print("No se pudieron obtener coordenadas o zona horaria para la ubicación.")
 
