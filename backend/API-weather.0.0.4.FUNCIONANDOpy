@@ -44,7 +44,6 @@ weather = {'latitude': 52.52, 'longitude': 13.419998, 'generationtime_ms': 0.831
 [45, 3, 1, 3, 1, 0, 45], 'sunrise': ['2023-09-04T06:22', '2023-09-05T06:23', '2023-09-06T06:25', '2023-09-07T06:27', '2023-09-08T06:28', '2023-09-09T06:30', '2023-09-10T06:32'], 'sunset': ['2023-09-04T19:48', '2023-09-05T19:46', '2023-09-06T19:44', '2023-09-07T19:41', '2023-09-08T19:39', '2023-09-09T19:37', '2023-09-10T19:34']}}"""
 
 
-#url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&timezone={timezone}&daily=temperature_2m_1h,precipitation_probability_mean,weathercode,sunrise,sunset&current_weather=true&forecast_days=7"
 
 #funcion que compruebaque la localicacion sea valida, si lo es devuelve longitu y latitud
 debugging = True
@@ -113,7 +112,7 @@ def geocode_location(location):
         print(f"Ocurrió un error al buscar la ubicación: {e}")
         return None
     
-#funcion que comprueba que el codigo postal sea valido en cuyo caso devuelve la longitu y latitud
+#funcion que comprueba que el codigo postal sea valido en cuyo caso devuelve la longitud y latitud
 
 def geocode_postal_code(postal_code):
     geocoder = pgeocode.Nominatim('es')
@@ -176,7 +175,7 @@ def get_timezone(location):
 
 def get_weather(latitude, longitude, timezone):
     #city = request.args.get('city')
-    #weather_response = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid=097cb4956829efc4877aa5dd20140f59')
+    
     #weather = weather_response.json()
     #forecast_text = f'El pronóstico del tiempo para {city} es: {weather["weather"][0]["description"]}.'
     #print(weather)
